@@ -75,7 +75,70 @@ const PaymentList = () => {
 					</div>
 				</div>
 				<div className="">
-					table
+					<div className="overflow-x-auto">
+						<table className="table w-full table-zebra">
+							<thead>
+								<tr>
+									<th>Billing ID</th>
+									<th>Full Name</th>
+									<th>Email</th>
+									<th>Phone</th>
+									<th>Paid Amount</th>
+									<th>Action</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>CyGanderton</td>
+									<td>Quality Control Specialist</td>
+									<td>rakibulmd933@gmail.com</td>
+									<td>01794970431</td>
+									<td>100</td>
+									<td><button className='p-2 text-base font-medium bg-green-400 rounded'>Update</button> <button className='p-2 text-base font-medium bg-red-400 rounded'>Deleted</button></td>
+								</tr>
+								<tr>
+									<td>CyGanderton</td>
+									<td>Quality Control Specialist</td>
+									<td>rakibulmd933@gmail.com</td>
+									<td>01794970431</td>
+									<td>100</td>
+									<td><button className='p-2 text-base font-medium bg-green-400 rounded'>Update</button> <button className='p-2 text-base font-medium bg-red-400 rounded'>Deleted</button></td>
+								</tr>
+								<tr>
+									<td>CyGanderton</td>
+									<td>Quality Control Specialist</td>
+									<td>rakibulmd933@gmail.com</td>
+									<td>01794970431</td>
+									<td>100</td>
+									<td><button className='p-2 text-base font-medium bg-green-400 rounded'>Update</button> <button className='p-2 text-base font-medium bg-red-400 rounded'>Deleted</button></td>
+								</tr>
+								<tr>
+									<td>CyGanderton</td>
+									<td>Quality Control Specialist</td>
+									<td>rakibulmd933@gmail.com</td>
+									<td>01794970431</td>
+									<td>100</td>
+									<td><button className='p-2 text-base font-medium bg-green-400 rounded'>Update</button> <button className='p-2 text-base font-medium bg-red-400 rounded'>Deleted</button></td>
+								</tr>
+								<tr>
+									<td>CyGanderton</td>
+									<td>Quality Control Specialist</td>
+									<td>rakibulmd933@gmail.com</td>
+									<td>01794970431</td>
+									<td>100</td>
+									<td><button className='p-2 text-base font-medium bg-green-400 rounded'>Update</button> <button className='p-2 text-base font-medium bg-red-400 rounded'>Deleted</button></td>
+								</tr>
+								<tr>
+									<td>CyGanderton</td>
+									<td>Quality Control Specialist</td>
+									<td>rakibulmd933@gmail.com</td>
+									<td>01794970431</td>
+									<td>100</td>
+									<td><button className='p-2 text-base font-medium bg-green-400 rounded'>Update</button> <button className='p-2 text-base font-medium bg-red-400 rounded'>Deleted</button></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
 				</div>
 			</div>
 		</div>
