@@ -18,7 +18,7 @@ const router = createBrowserRouter([
 				element: <Home />
 			},
 			{
-				path: 'pay-bill',
+				path: '/pay-bill',
 				element: <RequireAuth><PaymentList /></RequireAuth>
 			},
 			{
