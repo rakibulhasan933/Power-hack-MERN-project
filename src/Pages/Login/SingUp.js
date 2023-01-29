@@ -85,7 +85,7 @@ const SingUp = () => {
 						{signInError}
 						<input className='w-full max-w-xs text-white btn' type="submit" value="Sign Up" />
 					</form>
-					<p className='text-center'><small>old to walker shopping <Link to='/login' className='text-green-400 '>Login</Link> </small></p>
+					<p className='text-center'><small>old to power hack <Link to='/login' className='text-green-400 '>Login</Link> </small></p>
 					<div className="divider">OR</div>
 					<button onClick={() => signInWithGoogle()} className="mb-2 btn btn-outline">Continue with Google</button>
 				</div>
