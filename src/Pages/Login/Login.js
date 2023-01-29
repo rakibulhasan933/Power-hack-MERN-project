@@ -1,29 +1,26 @@
 import React from 'react';
-import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
-import auth from '../../firebase.init';
 import Loading from '../Shared/Loading/Loading';
 
 const Login = () => {
-	const [signInWithEmailAndPassword, user, loading, error] = useSignInWithEmailAndPassword(auth);
-	const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
+
 
 	const { register, handleSubmit, formState: { errors } } = useForm();
 	const onSubmit = data => {
-		signInWithEmailAndPassword(data.email, data.password);
+
 	};
 
 	let signInError;
 
-	if (loading || gLoading) {
+	if (loading) {
 		return <Loading />
 	};
-	if (gError || error) {
-		signInError = <p className='mb-2 text-center text-red-500'><small>{error?.message || gError?.message}</small> </p>
+	if (error) {
+		signInError = <p className='mb-2 text-center text-red-500'><small>{error?.message}</small> </p>
 	}
-	if (user || gUser) {
-		console.log(user || gUser);
+	if (user) {
+		console.log(user);
 	}
 	return (
 		<div className='flex items-center justify-center h-screen'>
@@ -72,8 +69,6 @@ const Login = () => {
 						<input className='w-full max-w-xs text-white btn' type="submit" value="Login" />
 					</form>
 					<p className='text-center'><small>New to power hack <Link to='/register' className='text-green-400 '>Create account</Link> </small></p>
-					<div className="divider">OR</div>
-					<button onClick={() => signInWithGoogle()} className="mb-2 btn btn-outline">Continue with Google</button>
 				</div>
 			</div>
 		</div>

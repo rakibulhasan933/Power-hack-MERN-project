@@ -1,9 +1,27 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 
 const PaymentList = () => {
 	const { register, handleSubmit, formState: { errors } } = useForm();
-	const onSubmit = data => console.log(data);
+	const onSubmit = data => {
+		fetch('http://localhost:5000/add-billing', {
+			method: 'POST',
+			headers: {
+				'content-type': 'application/json',
+			},
+			body: JSON.stringify(data)
+		})
+			.then(res => res.json())
+			.then(result => {
+				if (result?.result?.acknowledged) {
+					toast.success('Your payment successFully')
+				}
+				else {
+					toast.error('your payment Failed tray agin')
+				}
+			});
+	};
 	return (
 		<div >
 			<div className="flex flex-col">
