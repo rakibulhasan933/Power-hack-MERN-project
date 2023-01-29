@@ -6,9 +6,9 @@ const NotFound = () => {
 	return (
 		<div className='h-screen '>
 			<Navbar />
-			<div className='my-3 text-center'>
+			<div className='py-4 my-6 text-center'>
+				<p className='font-extrabold text-red-600 text-8xl'>4 <span className='text-blue-800 '>0</span> 4</p>
 				<p className='text-red-500'>Something went wrong!!!</p>
-				<p className='text-red-400'>Error Message</p>
 				<h4 className="text-3xl"> Please <button>Sign out</button> and log back in</h4>
 			</div>
 			<Footer />
