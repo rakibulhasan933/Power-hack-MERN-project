@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Main from "../../Layout/Main";
 import Home from "../../Pages/Home/Home";
 import Login from "../../Pages/Login/Login";
+import RequireAuth from "../../Pages/Login/RequireAuth";
 import SingUp from "../../Pages/Login/SingUp";
 import NotFound from "../../Pages/NotFound/NotFound";
 import PaymentList from "../../Pages/PaymentList/PaymentList";
@@ -18,7 +19,7 @@ const router = createBrowserRouter([
 			},
 			{
 				path: 'pay-bill',
-				element: <PaymentList />
+				element: <RequireAuth><PaymentList /></RequireAuth>
 			},
 			{
 				path: '/register',
