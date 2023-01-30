@@ -1,26 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import Loading from '../Shared/Loading/Loading';
 
+
 const Login = () => {
-
-
 	const { register, handleSubmit, formState: { errors } } = useForm();
+
+	const [isLoading, setLoading] = useState(false);
 	const onSubmit = data => {
+		setLoading(true);
+		fetch('http://localhost:5000/login', {
+			method: 'POST',
+			headers: {
+				'content-type': 'application/json',
+			},
+			body: JSON.stringify(data)
+		}).then(res => res.json())
+			.then(data => console.log(data));
 
 	};
-
-	let signInError;
-
-	if (loading) {
+	if (isLoading) {
 		return <Loading />
-	};
-	if (error) {
-		signInError = <p className='mb-2 text-center text-red-500'><small>{error?.message}</small> </p>
-	}
-	if (user) {
-		console.log(user);
 	}
 	return (
 		<div className='flex items-center justify-center h-screen'>
@@ -65,7 +66,6 @@ const Login = () => {
 								<p className="text-sm cursor-pointer label-text-alt text-cyan-300 text-end"><Link to='/reset=password'>Forget Password ?</Link> </p>
 							</label>
 						</div>
-						{signInError}
 						<input className='w-full max-w-xs text-white btn' type="submit" value="Login" />
 					</form>
 					<p className='text-center'><small>New to power hack <Link to='/register' className='text-green-400 '>Create account</Link> </small></p>

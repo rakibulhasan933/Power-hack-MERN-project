@@ -1,33 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
-import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
 import Loading from '../Shared/Loading/Loading';
-import auth from '../../firebase.init';
+
 
 const SingUp = () => {
-	const [createUserWithEmailAndPassword, user, loading, error] = useCreateUserWithEmailAndPassword(auth);
-	const [updateProfile, updating, uError] = useUpdateProfile(auth);
-	const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
-	let signInError;
-
 	const { register, handleSubmit, formState: { errors } } = useForm();
+	const [isLoading, setLoading] = useState(false);
+	const onSubmit = data => {
+		setLoading(true);
+		fetch('http://localhost:5000/login', {
+			method: 'POST',
+			headers: {
+				'content-type': 'application/json',
+			},
+			body: JSON.stringify(data)
+		}).then(res => res.json())
+			.then(data => console.log(data));
 
-	const onSubmit = async (data) => {
-		await createUserWithEmailAndPassword(data.email, data.password);
-		await updateProfile({ displayName: data.name });
 	};
-
-
-	if (loading || gLoading || updating) {
+	if (isLoading) {
 		return <Loading />
-	};
-	if (gError || error || uError) {
-		signInError = <p className='mb-2 text-center text-red-500'><small>{error?.message || gError?.message || uError?.message}</small> </p>
-	};
-	if (user || gUser) {
-		console.log(user || gUser);
-	};
+	}
 	return (
 		<div className='flex items-center justify-center h-screen'>
 			<div className="shadow-xl card w-96 bg-base-100 ">
@@ -82,12 +76,9 @@ const SingUp = () => {
 								{errors.password?.type === 'minLength' && <span className="text-red-500 label-text-alt">{errors.password?.message}</span>}
 							</label>
 						</div>
-						{signInError}
 						<input className='w-full max-w-xs text-white btn' type="submit" value="Sign Up" />
 					</form>
 					<p className='text-center'><small>old to power hack <Link to='/login' className='text-green-400 '>Login</Link> </small></p>
-					<div className="divider">OR</div>
-					<button onClick={() => signInWithGoogle()} className="mb-2 btn btn-outline">Continue with Google</button>
 				</div>
 			</div>
 		</div>
