@@ -98,7 +98,7 @@ const PaymentList = () => {
 										{errors.phone?.type === 'maxLength' && <span className="text-red-500 label-text-alt">{errors.phone?.message}</span>}
 									</label>
 									<label className="label">
-										<span className="label-text">Number</span>
+										<span className="label-text">Amount</span>
 									</label>
 									<input type="number" className="w-full max-w-xs input input-bordered" {...register("amount", {
 										required: {

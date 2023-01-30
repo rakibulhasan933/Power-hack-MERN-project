@@ -1,7 +1,12 @@
 import React from 'react';
+import Loading from '../Shared/Loading/Loading';
 import BillCard from './BillCard';
 
 const BillsCard = ({ currentBill, isLoading }) => {
+
+	if (isLoading) {
+		return <Loading />
+	}
 	return (
 		<div>
 			<div className="overflow-x-auto">
