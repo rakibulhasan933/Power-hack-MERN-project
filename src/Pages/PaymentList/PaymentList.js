@@ -40,7 +40,7 @@ const PaymentList = () => {
 	const [bills, setBills] = useState([]);
 	// const [isLoading, setLoading] = useState(false);
 	const [currentPage, setCurrentPage] = useState(1);
-	const [billPerPage] = useState(12);
+	const [billPerPage] = useState(10);
 
 	// Get Current page
 	const IndexOfLastBill = currentPage * billPerPage;
