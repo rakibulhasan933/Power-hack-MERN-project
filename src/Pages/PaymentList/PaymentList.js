@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
 const PaymentList = () => {
-	const { register, handleSubmit, formState: { errors } } = useForm();
+	const { register, handleSubmit, reset, formState: { errors } } = useForm();
 	const onSubmit = data => {
 		fetch('http://localhost:5000/add-billing', {
 			method: 'POST',
@@ -13,9 +13,10 @@ const PaymentList = () => {
 			body: JSON.stringify(data)
 		})
 			.then(res => res.json())
-			.then(result => {
-				if (result?.result?.acknowledged) {
-					toast.success('Your payment successFully')
+			.then(data => {
+				if (data.success) {
+					toast.success('Your payment successFully');
+					reset();
 				}
 				else {
 					toast.error('your payment Failed tray agin')
@@ -71,7 +72,7 @@ const PaymentList = () => {
 										{errors.phone?.type === 'maxLength' && <span className="text-red-500 label-text-alt">{errors.phone?.message}</span>}
 									</label>
 									<label className="label">
-										<span className="label-text">Email</span>
+										<span className="label-text">Number</span>
 									</label>
 									<input type="number" className="w-full max-w-xs input input-bordered" {...register("amount", {
 										required: {

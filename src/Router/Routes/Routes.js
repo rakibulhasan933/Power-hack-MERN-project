@@ -19,7 +19,7 @@ const router = createBrowserRouter([
 			},
 			{
 				path: '/pay-bill',
-				element: <RequireAuth><PaymentList /></RequireAuth>
+				element: <PaymentList />
 			},
 			{
 				path: '/register',
