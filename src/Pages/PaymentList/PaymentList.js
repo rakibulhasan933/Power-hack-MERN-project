@@ -58,7 +58,7 @@ const PaymentList = () => {
 			),
 	},
 		{
-			refetchInterval: 6000,
+			refetchInterval: 2000,
 		}
 	);
 	if (error) {
@@ -74,7 +74,7 @@ const PaymentList = () => {
 					<div className="flex content-center justify-between">
 						<h2 className='p-2 text-lg font-medium'>Billing</h2>
 
-						<input type="text" placeholder="Search" name='search' onBlur={handleChange} className="px-2 rounded w-80" />
+						<input type="text" placeholder="Search" name='search' onChange={handleChange} className="px-2 rounded w-80" />
 						<label htmlFor="payment-modal" className='p-2 text-base font-normal bg-blue-500 rounded cursor-pointer'>
 							Add Bill
 						</label>
