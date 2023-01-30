@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
+import BillsCard from './BillsCard';
+import Pagination from './Pagination';
 
 const PaymentList = () => {
 	const { register, handleSubmit, reset, formState: { errors } } = useForm();
@@ -23,6 +25,30 @@ const PaymentList = () => {
 				}
 			});
 	};
+	// pagination
+	const [bills, setBills] = useState([]);
+	const [isLoading, setLoading] = useState(false);
+	const [currentPage, setCurrentPage] = useState(1);
+	const [billPerPage] = useState(12);
+
+	// Get Current page
+	const IndexOfLastBill = currentPage * billPerPage;
+	const IndexOfFirstBill = IndexOfLastBill - billPerPage;
+	const currentBill = bills.slice(IndexOfFirstBill, IndexOfLastBill);
+	// Change Page
+	const paginate = (pageNumbers) => setCurrentPage(pageNumbers);
+
+	useEffect(() => {
+		setLoading(true);
+		fetch('http://localhost:5000/bill-list')
+			.then(res => res.json())
+			.then(data => {
+				setBills(data);
+				setLoading(false);
+			});
+	}, []);
+
+
 	return (
 		<div >
 			<div className="flex flex-col">
@@ -93,71 +119,9 @@ const PaymentList = () => {
 						</div>
 					</div>
 				</div>
-				<div className="">
-					<div className="overflow-x-auto">
-						<table className="table w-full table-zebra">
-							<thead>
-								<tr>
-									<th>Billing ID</th>
-									<th>Full Name</th>
-									<th>Email</th>
-									<th>Phone</th>
-									<th>Paid Amount</th>
-									<th>Action</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>CyGanderton</td>
-									<td>Quality Control Specialist</td>
-									<td>rakibulmd933@gmail.com</td>
-									<td>01794970431</td>
-									<td>100</td>
-									<td><button className='p-2 text-base font-medium bg-green-400 rounded'>Update</button> <button className='p-2 text-base font-medium bg-red-400 rounded'>Deleted</button></td>
-								</tr>
-								<tr>
-									<td>CyGanderton</td>
-									<td>Quality Control Specialist</td>
-									<td>rakibulmd933@gmail.com</td>
-									<td>01794970431</td>
-									<td>100</td>
-									<td><button className='p-2 text-base font-medium bg-green-400 rounded'>Update</button> <button className='p-2 text-base font-medium bg-red-400 rounded'>Deleted</button></td>
-								</tr>
-								<tr>
-									<td>CyGanderton</td>
-									<td>Quality Control Specialist</td>
-									<td>rakibulmd933@gmail.com</td>
-									<td>01794970431</td>
-									<td>100</td>
-									<td><button className='p-2 text-base font-medium bg-green-400 rounded'>Update</button> <button className='p-2 text-base font-medium bg-red-400 rounded'>Deleted</button></td>
-								</tr>
-								<tr>
-									<td>CyGanderton</td>
-									<td>Quality Control Specialist</td>
-									<td>rakibulmd933@gmail.com</td>
-									<td>01794970431</td>
-									<td>100</td>
-									<td><button className='p-2 text-base font-medium bg-green-400 rounded'>Update</button> <button className='p-2 text-base font-medium bg-red-400 rounded'>Deleted</button></td>
-								</tr>
-								<tr>
-									<td>CyGanderton</td>
-									<td>Quality Control Specialist</td>
-									<td>rakibulmd933@gmail.com</td>
-									<td>01794970431</td>
-									<td>100</td>
-									<td><button className='p-2 text-base font-medium bg-green-400 rounded'>Update</button> <button className='p-2 text-base font-medium bg-red-400 rounded'>Deleted</button></td>
-								</tr>
-								<tr>
-									<td>CyGanderton</td>
-									<td>Quality Control Specialist</td>
-									<td>rakibulmd933@gmail.com</td>
-									<td>01794970431</td>
-									<td>100</td>
-									<td><button className='p-2 text-base font-medium bg-green-400 rounded'>Update</button> <button className='p-2 text-base font-medium bg-red-400 rounded'>Deleted</button></td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
+				<div className="my-2">
+					<BillsCard currentBill={currentBill} isLoading={isLoading} />
+					<Pagination billPerPage={billPerPage} totalBills={bills.length} paginate={paginate} />
 				</div>
 			</div>
 		</div>
