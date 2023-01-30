@@ -39,16 +39,7 @@ const PaymentList = () => {
 	// Change Page
 	const paginate = (pageNumbers) => setCurrentPage(pageNumbers);
 
-	// useEffect(() => {
-	// 	setLoading(true);
-	// 	fetch('http://localhost:5000/bill-list')
-	// 		.then(res => res.json())
-	// 		.then(data => {
-	// 			setBills(data);
-	// 			setLoading(false);
-	// 		});
-	// }, []);
-	const { isLoading } = useQuery({
+	const { isLoading, error } = useQuery({
 		queryKey: ['billData'],
 		queryFn: () =>
 			fetch('http://localhost:5000/bill-list').then(
@@ -60,6 +51,9 @@ const PaymentList = () => {
 			refetchInterval: 6000,
 		}
 	);
+	if (error) {
+		console.log(error);
+	}
 
 
 	return (
