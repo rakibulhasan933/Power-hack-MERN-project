@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import BillsCard from './BillsCard';
@@ -26,6 +26,16 @@ const PaymentList = () => {
 				}
 			});
 	};
+
+	const [searchInput, setSearchInput] = useState(0);
+
+
+	const handleChange = (e) => {
+		e.preventDefault();
+		setSearchInput(e.target.value);
+	};
+
+
 	// pagination
 	const [bills, setBills] = useState([]);
 	// const [isLoading, setLoading] = useState(false);
@@ -42,7 +52,7 @@ const PaymentList = () => {
 	const { isLoading, error } = useQuery({
 		queryKey: ['billData'],
 		queryFn: () =>
-			fetch('http://localhost:5000/bill-list').then(
+			fetch(`http://localhost:5000/search/${searchInput}`).then(
 				(res) => res.json()
 					.then(data => setBills(data))
 			),
@@ -56,13 +66,15 @@ const PaymentList = () => {
 	}
 
 
+
 	return (
 		<div >
 			<div className="flex flex-col">
 				<div className="p-3 my-2 rounded bg-base-200">
 					<div className="flex content-center justify-between">
 						<h2 className='p-2 text-lg font-medium'>Billing</h2>
-						<input type="text" placeholder="Search" className="px-2 rounded w-80" />
+
+						<input type="text" placeholder="Search" name='search' onBlur={handleChange} className="px-2 rounded w-80" />
 						<label htmlFor="payment-modal" className='p-2 text-base font-normal bg-blue-500 rounded cursor-pointer'>
 							Add Bill
 						</label>
