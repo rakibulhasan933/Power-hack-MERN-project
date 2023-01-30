@@ -8,7 +8,7 @@ const Navbar = () => {
 	const { data, isLoading, error } = useQuery({
 		queryKey: ['length'],
 		queryFn: () =>
-			fetch('http://localhost:5000/bill-list').then(
+			fetch('https://power-hack-house-server.vercel.app/bill-list').then(
 				(res) => res.json()
 			),
 	},

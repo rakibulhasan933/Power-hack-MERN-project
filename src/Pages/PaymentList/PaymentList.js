@@ -8,7 +8,7 @@ import Pagination from './Pagination';
 const PaymentList = () => {
 	const { register, handleSubmit, reset, formState: { errors } } = useForm();
 	const onSubmit = data => {
-		fetch('http://localhost:5000/add-billing', {
+		fetch('https://power-hack-house-server.vercel.app/add-billing', {
 			method: 'POST',
 			headers: {
 				'content-type': 'application/json',
@@ -52,7 +52,7 @@ const PaymentList = () => {
 	const { isLoading, error } = useQuery({
 		queryKey: ['billData'],
 		queryFn: () =>
-			fetch(`http://localhost:5000/search/${searchInput}`).then(
+			fetch(`https://power-hack-house-server.vercel.app/search/${searchInput}`).then(
 				(res) => res.json()
 					.then(data => setBills(data))
 			),

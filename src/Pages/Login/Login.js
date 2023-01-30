@@ -10,7 +10,7 @@ const Login = () => {
 	const [isLoading, setLoading] = useState(false);
 	const onSubmit = data => {
 		setLoading(true);
-		fetch('http://localhost:5000/login', {
+		fetch('https://power-hack-house-server.vercel.app/login', {
 			method: 'POST',
 			headers: {
 				'content-type': 'application/json',

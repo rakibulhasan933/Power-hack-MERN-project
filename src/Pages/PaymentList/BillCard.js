@@ -7,7 +7,7 @@ import Swal from 'sweetalert2';
 const BillCard = ({ item }) => {
 	const { register, handleSubmit, reset, formState: { errors } } = useForm();
 	const onSubmit = data => {
-		fetch(`http://localhost:5000/update-billing/${item._id}`, {
+		fetch(`https://power-hack-house-server.vercel.app/update-billing/${item._id}`, {
 			method: 'PUT',
 			headers: {
 				'content-type': 'application/json',
@@ -43,7 +43,7 @@ const BillCard = ({ item }) => {
 			confirmButtonText: 'Yes, delete it!'
 		}).then((result) => {
 			if (result.isConfirmed) {
-				fetch(`http://localhost:5000/delete-billing/${id}`, {
+				fetch(`https://power-hack-house-server.vercel.app/delete-billing/${id}`, {
 					method: 'DELETE'
 				})
 					.then(res => res.json())
