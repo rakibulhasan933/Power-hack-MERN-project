@@ -27,6 +27,7 @@ const BillCard = ({ item }) => {
 								'success'
 							)
 							setIsDelete(true);
+
 						} else {
 							setIsDelete(false);
 						}

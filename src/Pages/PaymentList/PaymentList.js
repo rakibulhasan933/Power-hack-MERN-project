@@ -1,3 +1,4 @@
+import { useQuery } from '@tanstack/react-query';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
@@ -27,7 +28,7 @@ const PaymentList = () => {
 	};
 	// pagination
 	const [bills, setBills] = useState([]);
-	const [isLoading, setLoading] = useState(false);
+	// const [isLoading, setLoading] = useState(false);
 	const [currentPage, setCurrentPage] = useState(1);
 	const [billPerPage] = useState(12);
 
@@ -38,15 +39,27 @@ const PaymentList = () => {
 	// Change Page
 	const paginate = (pageNumbers) => setCurrentPage(pageNumbers);
 
-	useEffect(() => {
-		setLoading(true);
-		fetch('http://localhost:5000/bill-list')
-			.then(res => res.json())
-			.then(data => {
-				setBills(data);
-				setLoading(false);
-			});
-	}, []);
+	// useEffect(() => {
+	// 	setLoading(true);
+	// 	fetch('http://localhost:5000/bill-list')
+	// 		.then(res => res.json())
+	// 		.then(data => {
+	// 			setBills(data);
+	// 			setLoading(false);
+	// 		});
+	// }, []);
+	const { isLoading } = useQuery({
+		queryKey: ['billData'],
+		queryFn: () =>
+			fetch('http://localhost:5000/bill-list').then(
+				(res) => res.json()
+					.then(data => setBills(data))
+			),
+	},
+		{
+			refetchInterval: 6000,
+		}
+	);
 
 
 	return (
